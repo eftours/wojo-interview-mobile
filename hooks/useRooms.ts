@@ -1,20 +1,25 @@
 import { Room } from "@/app/rooming+api";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 export const useRooms = () => {
     const [rooms, setRooms] = useState<Room[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<Error | null>(null);
+
     useEffect(() => {
         const fetchRooms = async () => {
-            const data = await fetch("/rooming");
-            const rooms = await data.json();
-            setRooms(rooms);
-            setLoading(false);
+            try {
+                const data = await fetch("/rooming");
+                const rooms = await data.json();
+                setRooms(rooms);
+            } catch (e) {
+                setError(e instanceof Error ? e : new Error("Failed to fetch rooms"));
+            } finally {
+                setLoading(false);
+            }
         };
         fetchRooms();
     }, []);
-    return {
-        loading,
-        rooms,
-    };
+
+    return { rooms, loading, error };
 };

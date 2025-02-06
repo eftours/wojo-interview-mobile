@@ -10,7 +10,7 @@ export const SelectTravelers: React.FC<SelectTravelersProps> = ({ nbTravelers, s
         <Select
             value={nbTravelers}
             onChange={setNbTravelers}
-            items={Array.from({ length: 5 }).map((item, index) => ({
+            items={Array.from({ length: 12 }).map((item, index) => ({
                 value: index + 1,
                 label: String(index + 1),
             }))}

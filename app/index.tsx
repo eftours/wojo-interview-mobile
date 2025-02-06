@@ -2,6 +2,7 @@ import { View } from "react-native";
 import { RoomingList, Selection, SelectTravelers } from "../components";
 import { useEffect, useState } from "react";
 import { Stack } from "expo-router";
+import React from "react";
 
 export default function Index() {
     const [nbTravelers, setNbTravelers] = useState(2);
